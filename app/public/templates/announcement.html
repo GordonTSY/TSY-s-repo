@@ -1,6 +1,10 @@
 <div>
-<h3>User:{{user_name}}</h3>
-<h3>Identity:{{identity}}</h3>
+<fieldset>
+	<h3>User:{{user_name}}</h3>
+	<h3>Identity:{{identity}}</h3>
+</fieldset>
+<br>
+<fieldset>
 {{#announce}}
 	
 	<a href='http://localhost:8080/announce/{{url}}'>{{desc}}</a><br>
@@ -9,4 +13,5 @@
 {{^announce}}
 	<p>Some error occurred.Please try again.</p>
 {{/announce}}
+</fieldset>
 </div>

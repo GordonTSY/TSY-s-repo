@@ -1,5 +1,9 @@
 <div id="file_page">
-  <p> There are {{ mfiles.length }} files in this subject</p>
+<fieldset>
+  <h4> There are {{ mfiles.length }} files in this subject</h4>
+</fieldset>
+<br>
+<fieldset>
   {{#mfiles}}
   <div id="mfiles">
       <div class="mfile">
@@ -12,4 +16,5 @@
   {{^mfiles}}
       <p> This album does't have any files in it, sorry.<p>
   {{/mfiles}}
+ </fieldset>
 </div> <!-- #file_page -->

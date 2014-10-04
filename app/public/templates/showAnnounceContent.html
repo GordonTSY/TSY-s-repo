@@ -5,16 +5,22 @@
 <title>{{subject}}</title>
 </head>
 <div>
-<form action="http://foo.com" method="post">
+<form action="http://localhost:8080/" method="post">
 <table border=1>
-<tr>
-	<td>{{date}}</td>
-</tr>
-<tr>
-	<td><input type="text" name="textField" value="{{content}}"> </td>
-<tr>
-	<td><input type="reset" value="取消編輯"></td>
-</tr>
+<fieldset>
+	<center>{{date}}</center>
+</fieldset>
+<br>
+<center>
+<textarea id="content" style="width:1000px;height:500px;">
+		{{content}}
+</textarea>
+</center>
+<br>
+<center>
+<input type="reset" style="font-size:30px" value="取消">
+<input type="button" style="font-size:30px" value="送出">
+</center>
 </form>
 </div>
 </html>

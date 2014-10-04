@@ -40,6 +40,7 @@ exports.material_by_name = function (req, res) {
         }
     );
 };
+/*
 function load_material_list(callback) {
     // we will just assume that any directory in our 'materials'
     // sub-folder is an material.
@@ -76,7 +77,7 @@ function load_material_list(callback) {
             );
         }
     );
-};
+};*/
 function load_material(material_name, page, page_size, callback){
 	mhelper.getSubjectList(material_name, page, page_size, callback);
 
