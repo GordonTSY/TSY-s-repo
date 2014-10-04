@@ -26,13 +26,17 @@ $(function(){
 });
 function massage_material(d) {
     if (d.error != null) return d;
-    var obj = { mfiles: [] };
+    var obj = { mfiles: [] ,Info:[]};
 
     var af = d.data.material_contents_data;
 
     for (var i = 0; i < af.mfiles.length; i++) {
         var url = af.short_name +"/"+ af.mfiles[i].filename;
-        obj.mfiles.push({ url: url, desc: af.mfiles[i].filename });
+		var desc=af.mfiles[i].filename;
+		desc=desc.substring(0,desc.lastIndexOf("."));
+        obj.mfiles.push({ url: url, desc: desc});
     }
+	var IconURL=af.short_name +"/"+af.Icon;
+	 obj.Info.push({IconURL:IconURL})
     return obj;
 }

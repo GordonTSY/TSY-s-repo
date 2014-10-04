@@ -5,16 +5,11 @@ var app = express();
 var fs = require('fs'),
     path = require('path'),
     material_hdlr = require('./handlers/materials.js'),
-	subject_hdlr =require('./handlers/subjects.js'),
 	syllabus_hdlr=require('./handlers/syllabus.js'),
 	announcement_hdlr=require('./handlers/announcement.js'),
     page_hdlr = require('./handlers/pages.js'),
     helpers = require('./handlers/helpers.js');
-
-//app.get('/v1/materials.json', material_hdlr.list_all);
 app.get('/v1/materials/:material_name.json', material_hdlr.material_by_name);
-//app.get('/subjects.json', subject_hdlr.list_subject_list);
-//app.get('/announcement.json', announcement_hdlr.getAnnouncement);
 app.get('/pages/:page_name',function (req, res) {
 	page_hdlr.generate(req, res);
 	});
@@ -28,19 +23,9 @@ app.get('/materials/:permanent_ID/:current_ID/:filename', function (req, res) {
 	var url="../public/materials/"+req.params.permanent_ID+"/"+req.params.current_ID+"/"+req.params.filename;
     serve_static_file(url,res);
 });
-/*
-//It shouldn't be implemented in this way since the user may had taken the subject for several time,
-//so there would be multi current ID. 
-app.get('/syllabus/:permanent_ID/:current_ID',function (req, res) {
-	var url="syllabus/"+req.params.permanent_ID+"/"+req.params.current_ID;
-	serve_static_file(url,res);
-}); 
-*/
 app.get('/syllabus/:permanent_ID',function (req, res) {
 	syllabus_hdlr.load_syllabus(req,res,serve_static_file);
 });
-//Called by announcement_hdlr.getAnnouncement,return a object with single property 
-//which contains all announce in the curentID folder. 
 app.get('/announcement/:permanent_ID',function (req, res) {
 	announcement_hdlr.listAnnouncement(req, res);
 });
@@ -51,8 +36,6 @@ app.get('/announce/:permanent_ID/:current_ID/:filename',function(req,res){
 	announcement_hdlr.showAnnouncement(req,res);
 });
 app.get('*', four_oh_four);
-
-
 function four_oh_four(req, res) {
     res.writeHead(404, { "Content-Type" : "application/json" });
     res.end(JSON.stringify(helpers.invalid_resource()) + "\n");
