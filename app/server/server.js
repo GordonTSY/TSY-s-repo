@@ -9,6 +9,10 @@ var fs = require('fs'),
 	announcement_hdlr=require('./handlers/announcement.js'),
     page_hdlr = require('./handlers/pages.js'),
     helpers = require('./handlers/helpers.js');
+	subject_hdlr=require('./handlers/subjects.js');
+app.use(express.bodyParser());
+//app.get('/v1/materials.json', material_hdlr.list_all);
+app.get('/subjects.json', subject_hdlr.list_subject_list);
 app.get('/v1/materials/:material_name.json', material_hdlr.material_by_name);
 app.get('/pages/:page_name',function (req, res) {
 	page_hdlr.generate(req, res);
@@ -34,6 +38,20 @@ app.get('/templates/:template_name', function (req, res) {
 });
 app.get('/announce/:permanent_ID/:current_ID/:filename',function(req,res){
 	announcement_hdlr.showAnnouncement(req,res);
+});
+app.post('/announce/',function(req,res){
+	
+	console.log(req.body);
+	
+});
+app.get('/announce/create',function(req,res){
+	var url="../public/templates/createAnnounce.html";
+	serve_static_file(url,res);
+	
+});
+app.post('/announce/create/:permanent_ID/:current_ID',function(req,res){
+	res.end("finish");
+	
 });
 app.get('*', four_oh_four);
 function four_oh_four(req, res) {

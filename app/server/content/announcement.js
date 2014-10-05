@@ -31,7 +31,9 @@ function massage_announce(d) {
 	var obj = { announce: [],user_name:af.user_name,identity:af.identity};
     for (var i = 0; i < af.announce.length; i++) {
         var url = af.short_name+"/"+ af.announce[i].name;
-        obj.announce.push({ url: url, desc: af.announce[i].name });
+		var desc=af.announce[i].name;
+		desc=desc.substring(0,desc.lastIndexOf("."));
+        obj.announce.push({ url: url, desc: desc });
     }
     return obj;
 }

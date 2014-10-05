@@ -49,6 +49,28 @@ exports.showAnnouncement=function(req,res){
 		});
 	});
 }
+exports.createAnnounce=function(req,res){
+	var theTime=new date();
+	var month=theTime.getMonth(),
+		date=theTime.getDate(),
+		hour=theTime.getHours(),
+		min=theTime.getMinutes(),
+		sec=theTime.getSeconds();
+	month=beautification(month);
+	date=beautification(date);
+	hour=beautification(hour);
+	min=beautification(min);
+	sec=beautification(sec);
+	var fileName=""+theTime.getFullYear()+month+date+hour+min+sec;
+	
+	var url="../public/announce/"+req.params.permanent_ID+"/"+req.params.current_ID+"/"+fileName;
+	fs.writeFile(url,req.body.content);
+	res.end("Save");
+};
+function beautification(item){
+		if (item<10) {item = "0" + item}; 
+		return item;
+}
 function loadAnnouncementContent(req,callback){
 	var url="../public/announce/"+req.params.permanent_ID+"/"+req.params.current_ID+"/"+req.params.filename;
 	fs.readFile(url,function(err,file){

@@ -43,5 +43,42 @@ exports.material_by_name = function (req, res) {
 
 function load_material(material_name, page, page_size, callback){
 	mhelper.getSubjectList(material_name, page, page_size, callback);
-
 }
+/*
+function load_material_list(callback) {
+    // we will just assume that any directory in our 'materials'
+    // sub-folder is an material.
+    fs.readdir(
+        "../../public/materials",
+        function (err, files) {
+            if (err) {
+                callback(helpers.make_error("file_error", JSON.stringify(err)));
+                return;
+            }
+
+            var only_dirs = [];
+            async.forEach(
+                files,
+                function (element, cb) {
+                    fs.stat(
+                        "materials/" + element,
+                        function (err, stats) {
+                            if (err) {
+                                cb(helpers.make_error("file_error",
+                                                      JSON.stringify(err)));
+                                return;
+                            }
+                            if (stats.isDirectory()) {
+                                only_dirs.push({ name: element });
+                            }
+                            cb(null);
+                        }                    
+                    );
+                },
+                function (err) {
+                    callback(err, err ? null : only_dirs);
+                }
+            );
+        }
+    );
+};*/
